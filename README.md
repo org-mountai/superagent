@@ -42,9 +42,14 @@ Die private Referenzimplementierung hatte zu diesem Stand folgende Scheiben bele
   neuen ungelesenen Nachrichten vor dem letzten Cursor; ohne Cursor bleibt genau eine Nachricht
   der sichere Fallback. Vier Offline-Proben und ein echter Lauf mit drei getrennten Tickets und
   genau einer Brückenmeldung sind grün.
-- **Eine read-only Statusprojektion:** Das Paseo-Plugin
+- **Eine Statusprojektion mit engem R0-Drop:** Das Paseo-Plugin
   [org-mountai/paseo-superagent](https://github.com/org-mountai/paseo-superagent) zeigt
-  Watchdog, Brücke, offene Tickets, Worker und Blocker, ohne Schreibaktionen.
+  Watchdog, Brücke, offene Tickets, Worker und Blocker. Offene R0-Kanal-Tickets aus Mail,
+  Projektmanagement und Zeitplan lassen sich nach einem zweiten Bestätigungsklick verwerfen;
+  der Server prüft Quelle und Status erneut und nutzt den bestehenden Drop-Befehl samt Audit.
+  GitHub-/Host-Tickets und alle R2-/R3-Aktionen sind ausgeschlossen. Eine Guard-Probe gegen ein
+  GitHub-Ticket wurde unverändert abgelehnt, eine Zeitplan-Probe genau einmal verworfen; der
+  Folge-Sync blieb `quiet`, Typecheck und Live-Reload sind grün. Weitere Steuerung gibt es nicht.
 - **Backup und Schema:** Das Backup-Werkzeug nutzt SQLite-Online-Backup mit
   Integritätsprüfung, read-only Restore-Sicht und Retention 7. `PRAGMA user_version=1`
   versioniert das Schema; neuere unbekannte Versionen werden abgelehnt. Zwei echte Backups
@@ -60,8 +65,8 @@ Das ist der belegte Stand. Die Architektur ist bewusst größer als die Implemen
   Testhost bleibt offen.
 - **Mailkörper-Verarbeitung.** Die Per-Mail-Signalerfassung ist belegt; Körper werden aber
   weiterhin nicht automatisch gelesen oder beantwortet. Diese Grenze bleibt offen.
-- Freigabe- und Steuerungsoberflächen, Kosten- und Parallelitätsbudgets, weitere
-  Runtime-Adapter und das Skalieren auf mehrere Worker-Hosts.
+- Freigabe- und Steuerungsoberflächen jenseits des R0-Drops, Kosten- und
+  Parallelitätsbudgets, weitere Runtime-Adapter und das Skalieren auf mehrere Worker-Hosts.
 - Eine Lizenz ist noch nicht gewählt; dieses Repository enthält bewusst keine `LICENSE`-Datei.
 
 ## Dokumente
@@ -69,7 +74,7 @@ Das ist der belegte Stand. Die Architektur ist bewusst größer als die Implemen
 - [Architektur](docs/architecture.md) — Bausteine, Ticketfluss, Risikoklassen, Verträge
 - [Deployment](docs/deployment.md) — generische Schritte für einen neuen Kundenstack
 - [Gotchas](docs/gotchas.md) — Fehler, die die Referenzimplementierung bereits bezahlt hat
-- [Paseo-Statusplugin](https://github.com/org-mountai/paseo-superagent) — read-only Projektion
+- [Paseo-Statusplugin](https://github.com/org-mountai/paseo-superagent) — Statusprojektion plus eng begrenzter R0-Drop
 
 ## Abgrenzung
 

@@ -59,7 +59,7 @@ Chat · Code · Mail · pm · Host · Zeitplan
 | Outbox | PR, Bericht, Kommentar oder Meldung genau einmal zustellen | ja |
 | Watchdog | Zustand abgleichen, Blocker und Hänger melden | ja |
 | Kanal-Adapter | Quelle in ein gemeinsames Ereignis übersetzen | ja |
-| Statusprojektion | read-only Ansicht auf `status --json` | ja |
+| Statusprojektion | Ansicht auf `status --json`, plus eng begrenzter R0-Drop | ja |
 
 ## 3. Ticketfluss
 
@@ -146,7 +146,12 @@ Repo-Worker.
 ### Statusprojektion
 
 `status --json` ist das gemeinsame, maschinenlesbare Lesemodell. Chat, UI und Dashboard sind
-austauschbare Projektionen darauf. Eine Projektion ist read-only und nie der Ticketbestand.
+austauschbare Projektionen darauf. Eine Projektion ist nie der Ticketbestand. Die einzige
+Schreibaktion ist ein eng begrenzter R0-Drop: Nur offene Kanal-Tickets aus Mail,
+Projektmanagement und Zeitplan dürfen nach einem zweiten Bestätigungsklick im Client verworfen
+werden. Der Server prüft Quelle und Status erneut, nutzt den bestehenden Drop-Befehl und
+schreibt den Audit-Eintrag. GitHub-/Host-Tickets und alle R2-/R3-Aktionen sind ausgeschlossen;
+jede weitere Steuerung braucht eine eigene Entscheidung, Guard und Audit.
 
 ## 6. Haltbarkeit und Wahrheit
 

@@ -107,6 +107,14 @@ Für die Host-Schleife:
 - dieselbe Befundversion führt nicht erneut aus,
 - ein Fehler bleibt sichtbar und wird nicht still wiederholt.
 
+Für die Statusprojektion:
+
+- Offene R0-Kanal-Tickets aus Mail, Projektmanagement und Zeitplan lassen sich nach einer
+  zweiten Bestätigung verwerfen.
+- Der Server prüft Quelle und Status erneut und schreibt den Audit-Eintrag.
+- GitHub-/Host-Tickets und alle R2-/R3-Aktionen werden unverändert abgelehnt.
+- Ein Folge-Sync bleibt `quiet`.
+
 ## 9. Betrieb
 
 - **Täglich:** `status --json`, Blocker, fehlgeschlagene Timer, Alter des letzten Backups.

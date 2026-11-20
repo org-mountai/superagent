@@ -63,12 +63,16 @@ eine Betriebsregel, keine Theorie.
   Fallback. Körper werden weiterhin nicht automatisch gelesen oder beantwortet. Diese Grenze
   nicht als offene Signal-Erfassung missverstehen — und nicht als Freigabe zum Antworten.
 - **Keine Körper, Tokens oder Kundendaten in Logs, Tickets oder Statusansichten.** Die
-  Projektion ist read-only und bleibt es.
+  Projektion bleibt bis auf den benannten R0-Drop lesend.
 
 ## Meldungen
 
 - **Nur Änderungen und Blocker melden.** Zustands-Spam erzieht dazu, den Kanal zu ignorieren.
 - **Eine fehlgeschlagene Benachrichtigung darf die darunterliegende Aktion nicht verstecken.**
   Der Nachweis bleibt im Ticket; die Zustellung wird separat wiederholt.
-- **Eine read-only Projektion darf nicht heimlich Schreibaktionen bekommen.** Kein Start, kein
-  Retry, keine Freigabe aus der Ansicht.
+- **Eine Projektion darf nicht heimlich Schreibaktionen bekommen.** Die einzige Ausnahme ist
+  der ausdrücklich benannte R0-Drop für offene Kanal-Tickets; kein Start, kein Retry, keine
+  Freigabe und keine R2-/R3-Aktion aus der Ansicht.
+- **Der zweite Klick ist UX, nicht Autorisierung.** Der Server prüft Quelle und Status erneut,
+  bevor er den bestehenden Drop-Befehl aufruft; ein GitHub- oder Host-Ticket wird unverändert
+  abgelehnt und protokolliert.
