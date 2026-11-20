@@ -123,8 +123,8 @@ Für die Host-Schleife:
 
 ## 11. Für jeden neuen Stack offen
 
-- Backup-/Restore-Runbook mit getestetem Restore.
-- Versionierter Schema-Migrationspfad.
+- Produktive Wiederherstellung auf einem separaten Testhost; Backup, Integritätsprüfung,
+  read-only Restore-Sicht und Schema-Versionierung sind belegt.
 - Automatische Mailkörper-Verarbeitung und -Beantwortung; die Signalerfassung ist belegt
   (siehe [Gotchas](gotchas.md)).
 - Freigabeoberfläche und Aufbewahrungsfristen für Audits.

@@ -156,8 +156,10 @@ austauschbare Projektionen darauf. Eine Projektion ist read-only und nie der Tic
 - **Policy:** versionierte Konfiguration im Repo; sie ist die Wahrheit, kein Prompt.
 - **Code:** Repositories und Pull Requests bleiben die Wahrheit für Code.
 - **Langzeitentscheidungen:** versionierte Dokumentation, nicht der Ticketstore.
-- **Backup und Schema-Migration:** ausdrücklich offene Arbeit. Vor einer Schemaänderung ist eine
-  Kopie Pflicht; ein getesteter Restore gehört zum Betrieb.
+- **Backup und Schema:** belegt. SQLite-Online-Backup mit Integritätsprüfung, read-only
+  Restore-Sicht und Retention 7; `PRAGMA user_version=1`, neuere unbekannte Versionen werden
+  abgelehnt. Zwei echte Backups mit realem Bestand waren `ok`, ein täglicher Timer läuft und
+  ist aktiviert. Eine produktive Wiederherstellung auf einem separaten Testhost bleibt offen.
 
 ## 7. Bewusste Nichtziele
 

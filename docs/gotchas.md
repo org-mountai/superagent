@@ -51,8 +51,10 @@ eine Betriebsregel, keine Theorie.
 ## Daten und Bestand
 
 - **Die SQLite-Datenbank ist nicht rekonstruierbar.** Manuelle Tickets, Freigaben, Besitzer und
-  Verlauf existieren nur dort. Vor Schemaänderungen eine Kopie ziehen; Backup und
-  Schema-Härtung sind noch offene Arbeit.
+  Verlauf existieren nur dort. Deshalb gilt: SQLite-Online-Backup mit Integritätsprüfung,
+  read-only Restore-Sicht und Retention 7; `PRAGMA user_version=1`, neuere unbekannte
+  Versionen werden abgelehnt. Eine produktive Wiederherstellung auf einem separaten Testhost
+  steht noch aus.
 - **Ticket, Ereignis und Cursor in einer Transaktion.** Sonst verliert oder dupliziert ein
   Absturz ein Signal.
 - **Signalerfassung ist nicht Körperverarbeitung.** Die Per-Mail-Signalerfassung ist belegt:

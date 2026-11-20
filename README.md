@@ -45,13 +45,19 @@ Die private Referenzimplementierung hatte zu diesem Stand folgende Scheiben bele
 - **Eine read-only Statusprojektion:** Das Paseo-Plugin
   [org-mountai/paseo-superagent](https://github.com/org-mountai/paseo-superagent) zeigt
   Watchdog, Brücke, offene Tickets, Worker und Blocker, ohne Schreibaktionen.
+- **Backup und Schema:** Das Backup-Werkzeug nutzt SQLite-Online-Backup mit
+  Integritätsprüfung, read-only Restore-Sicht und Retention 7. `PRAGMA user_version=1`
+  versioniert das Schema; neuere unbekannte Versionen werden abgelehnt. Zwei echte Backups
+  mit realem Bestand waren `ok`, ein täglicher Timer läuft und ist aktiviert. Zwei
+  Offline-Proben und die komplette Suite sind grün.
 
 Das ist der belegte Stand. Die Architektur ist bewusst größer als die Implementierung.
 
 ## Bewusst offen
 
-- **Backup und Schema-Härtung** für den Ticketbestand. Die SQLite-Datenbank ist nicht beliebig
-  rekonstruierbar; ein Backup- und Migrationskonzept ist noch Arbeit, kein fertiger Zustand.
+- **Produktive Wiederherstellung.** Backup, Integritätsprüfung, read-only Restore-Sicht und
+  Schema-Versionierung sind belegt; die echte produktive Wiederherstellung auf einem separaten
+  Testhost bleibt offen.
 - **Mailkörper-Verarbeitung.** Die Per-Mail-Signalerfassung ist belegt; Körper werden aber
   weiterhin nicht automatisch gelesen oder beantwortet. Diese Grenze bleibt offen.
 - Freigabe- und Steuerungsoberflächen, Kosten- und Parallelitätsbudgets, weitere
