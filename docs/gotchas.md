@@ -55,9 +55,11 @@ eine Betriebsregel, keine Theorie.
   Schema-Härtung sind noch offene Arbeit.
 - **Ticket, Ereignis und Cursor in einer Transaktion.** Sonst verliert oder dupliziert ein
   Absturz ein Signal.
-- **Per-Mail-Erfassung ist noch nicht vollständig.** Der aktuelle Kanal verarbeitet Ereignisse
-  und Metadaten, nicht jede Mail und nicht ihre Körper. Diese Lücke nicht als „fertig“
-  dokumentieren.
+- **Signalerfassung ist nicht Körperverarbeitung.** Die Per-Mail-Signalerfassung ist belegt:
+  für die ID-basierte Mailquelle alle neuen IDs aufsteigend, für IMAP alle neuen ungelesenen
+  Nachrichten vor dem letzten Cursor; ohne Cursor ist genau eine Nachricht der sichere
+  Fallback. Körper werden weiterhin nicht automatisch gelesen oder beantwortet. Diese Grenze
+  nicht als offene Signal-Erfassung missverstehen — und nicht als Freigabe zum Antworten.
 - **Keine Körper, Tokens oder Kundendaten in Logs, Tickets oder Statusansichten.** Die
   Projektion ist read-only und bleibt es.
 

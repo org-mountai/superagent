@@ -37,7 +37,11 @@ Die private Referenzimplementierung hatte zu diesem Stand folgende Scheiben bele
 - **Ein dauerhafter First-Mate-Thread:** Ausgewählte Ticket-Ereignisse wurden per Label an genau
   einen langlebigen Thread gesendet, mit Cursor und ohne Wiederholung alter Historie.
 - **Ein Kanal-Adapter:** Mail-, Projektmanagement- und Zeitplan-Signale wurden als idempotente
-  R0-Tickets ohne Nachrichtenkörper im selben Ticketbestand geführt.
+  R0-Tickets ohne Nachrichtenkörper im selben Ticketbestand geführt. Die Mail-Signalerfassung
+  ist vollständig: für die ID-basierte Mailquelle alle neuen IDs aufsteigend, für IMAP alle
+  neuen ungelesenen Nachrichten vor dem letzten Cursor; ohne Cursor bleibt genau eine Nachricht
+  der sichere Fallback. Vier Offline-Proben und ein echter Lauf mit drei getrennten Tickets und
+  genau einer Brückenmeldung sind grün.
 - **Eine read-only Statusprojektion:** Das Paseo-Plugin
   [org-mountai/paseo-superagent](https://github.com/org-mountai/paseo-superagent) zeigt
   Watchdog, Brücke, offene Tickets, Worker und Blocker, ohne Schreibaktionen.
@@ -48,8 +52,8 @@ Das ist der belegte Stand. Die Architektur ist bewusst größer als die Implemen
 
 - **Backup und Schema-Härtung** für den Ticketbestand. Die SQLite-Datenbank ist nicht beliebig
   rekonstruierbar; ein Backup- und Migrationskonzept ist noch Arbeit, kein fertiger Zustand.
-- **Vollständige Per-Mail-Erfassung.** Der aktuelle Kanal verarbeitet Ereignisse und Metadaten,
-  nicht jede Mail und nicht ihre Körper. Das ist ausdrücklich noch nicht umgesetzt.
+- **Mailkörper-Verarbeitung.** Die Per-Mail-Signalerfassung ist belegt; Körper werden aber
+  weiterhin nicht automatisch gelesen oder beantwortet. Diese Grenze bleibt offen.
 - Freigabe- und Steuerungsoberflächen, Kosten- und Parallelitätsbudgets, weitere
   Runtime-Adapter und das Skalieren auf mehrere Worker-Hosts.
 - Eine Lizenz ist noch nicht gewählt; dieses Repository enthält bewusst keine `LICENSE`-Datei.

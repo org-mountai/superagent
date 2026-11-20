@@ -125,6 +125,7 @@ Für die Host-Schleife:
 
 - Backup-/Restore-Runbook mit getestetem Restore.
 - Versionierter Schema-Migrationspfad.
-- Vollständige Per-Mail-Erfassung (siehe [Gotchas](gotchas.md)).
+- Automatische Mailkörper-Verarbeitung und -Beantwortung; die Signalerfassung ist belegt
+  (siehe [Gotchas](gotchas.md)).
 - Freigabeoberfläche und Aufbewahrungsfristen für Audits.
 - Kosten- und Parallelitätsbudgets.

@@ -117,10 +117,12 @@ normalize(source_event) → event {
 ```
 
 Der Adapter ist idempotent, setzt beim ersten Lauf eine Baseline und liefert nur die Felder,
-die die Datenpolitik erlaubt. Für Mail ist metadaten-only der Default; Körper nur, wenn es
-ausdrücklich vorgesehen ist. R0-Signale aus Mail, Projektmanagement und Zeitplan werden zu
-Tickets, aber nicht automatisch an Repo-Worker übergeben: zuerst ordnet der First Mate ein, der
-Dispatcher verweigert sie ausdrücklich.
+die die Datenpolitik erlaubt. Für Mail werden Signale und Metadaten erfasst; Körper werden
+nicht automatisch gelesen oder beantwortet. Die Signalerfassung ist belegt: für die ID-basierte
+Mailquelle alle neuen IDs aufsteigend, für IMAP alle neuen ungelesenen Nachrichten vor dem
+letzten Cursor; fehlt der Cursor, ist genau eine Nachricht der sichere Fallback. R0-Signale aus
+Mail, Projektmanagement und Zeitplan werden zu Tickets, aber nicht automatisch an Repo-Worker
+übergeben: zuerst ordnet der First Mate ein, der Dispatcher verweigert sie ausdrücklich.
 
 ### Runtime-Adapter
 
